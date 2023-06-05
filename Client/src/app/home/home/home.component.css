@@ -1,0 +1,67 @@
+.example-icon {
+  padding: 0 14px;
+}
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.example-container {
+  height: 100vh;
+  /* border: 1px solid #555; */
+}
+mat-drawer {
+  width: 300px;
+}
+mat-drawer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.mat-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000 !important;
+}
+
+#mainContent {
+  height: calc(
+    100vh - 64px
+  ); /* Adjust the height as needed based on your toolbar height */
+  overflow: auto;
+}
+mat-list-item:hover {
+  background-color: whitesmoke;
+  cursor: pointer;
+}
+.appDrawer {
+  background-color: #3f51b5;
+  padding: 30px;
+}
+.avatar {
+  /* height: 160px; */
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Add any other desired styles */
+}
+.avatar-image {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 50%;
+}
+.avatar-image img {
+  border-radius: 50%;
+  border: 4px solid white;
+}
+.profileName {
+  text-align: center;
+  /* font-weight: bold; */
+  font-size: 24px;
+
+  cursor: pointer;
+  color: whitesmoke;
+}

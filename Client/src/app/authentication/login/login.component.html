@@ -1,0 +1,14 @@
+<div fxLayout="row" fxLayoutAlign="center center" style="padding:20px">
+    <div fxFlex="20" fxLayout="column" fxLayoutAlign="center center">
+        <mat-form-field fxFlex fxFlexFill>
+            <mat-label>Username</mat-label>
+            <input matInput type="text" [(ngModel)]="loginForm.username" />
+        </mat-form-field>
+        <mat-form-field fxFlex fxFlexFill>
+            <mat-label>Password</mat-label>
+            <input matInput type="password" [(ngModel)]="loginForm.password" />
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="login()" style="width: 100%;">Login</button>
+        <span [routerLink]="'/register'" style="padding:10px;text-align: right;"><a>Register</a></span>
+    </div>
+</div>

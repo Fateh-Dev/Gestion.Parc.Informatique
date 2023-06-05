@@ -1,0 +1,21 @@
+<div fxLayout="row" fxLayoutAlign="center center" style="padding:20px">
+    <div fxFlex="20" fxLayout="column" fxLayoutAlign="center center">
+        <mat-form-field fxFlex fxFlexFill>
+            <mat-label>First name</mat-label>
+            <input matInput type="text" [(ngModel)]="registerForm.firstName" />
+        </mat-form-field>
+        <mat-form-field fxFlex fxFlexFill>
+            <mat-label>Last name</mat-label>
+            <input matInput type="password" [(ngModel)]="registerForm.lastName" />
+        </mat-form-field>
+        <mat-form-field fxFlex fxFlexFill>
+            <mat-label>Username</mat-label>
+            <input matInput type="text" [(ngModel)]="registerForm.username" />
+        </mat-form-field>
+        <mat-form-field fxFlex fxFlexFill>
+            <mat-label>Password</mat-label>
+            <input matInput type="password" [(ngModel)]="registerForm.password" />
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="register()" style="width: 100%;">Register</button>
+    </div>
+</div>
