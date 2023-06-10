@@ -24,7 +24,7 @@ export class AppStoreService {
     return this.http.get<any>("https://localhost:8000/AuthManage/getAllPermissions");
   }
   addPermissionToRole(data: any) {
-    return this.http.post<any>("https://localhost:8000/AuthManage/createPermissionToRole", data);
+    return this.http.post<any>("https://localhost:8000/AuthManage/addPermissionToRoleList", data);
   }
 
 }

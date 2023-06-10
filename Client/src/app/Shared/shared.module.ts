@@ -7,23 +7,26 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { FormsModule } from '@angular/forms';
 import { HasPermissionPipe } from './has-permission.pipe';
+import { HierarchicalComponent } from './hierarchical/hierarchical.component';
 
 @NgModule({
   declarations: [
     RestMaterialTableComponent,
     NotFoundPageComponent,
-    HasPermissionPipe
+    HasPermissionPipe,
+    HierarchicalComponent,
   ],
   imports: [
     CommonModule,
     MaterialModule,
     FormsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
   ],
   exports: [
     NotFoundPageComponent,
     RestMaterialTableComponent,
     MaterialModule,
+    HierarchicalComponent,
     FormsModule,
     FlexLayoutModule,
     HasPermissionPipe

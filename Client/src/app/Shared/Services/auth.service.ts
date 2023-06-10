@@ -67,7 +67,7 @@ export class AuthService {
           // Save the token to localStorage 
           localStorage.setItem('token', res.token as string);
           localStorage.setItem('userId', res.id as any);
-          this.router.navigate(['/home']);
+          this.router.navigate(['/app']);
           this.toastr.success('Authentication Success ', 'Success', {
             positionClass: 'toast-bottom-center'
           });

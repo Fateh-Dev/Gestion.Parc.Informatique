@@ -40,3 +40,10 @@ public class PermissionCreateDto
     public string PermissionName { get; set; }
     public string Description { get; set; }
 }
+
+public class RoleWithListPermissions
+{
+    public int IdRole { get; set; }
+    public List<PermissionCreateDto> Permissions { get; set; }
+
+}

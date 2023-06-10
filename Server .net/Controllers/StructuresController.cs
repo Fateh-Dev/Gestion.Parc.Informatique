@@ -1,13 +1,14 @@
 using AutoMapper;
 using Gestion.Parc.Informatique.Data;
 using Gestion.Parc.Informatique.Service;
+using LinqKit;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Gestion.Parc.Informatique.Controllers;
 
-[Authorize]
+// [Authorize]
 [ApiController]
 [Route("[controller]")]
 [ApiExplorerSettings(GroupName = "Gestion Parc Informatique")]
@@ -45,24 +46,29 @@ public class StructuresController : ControllerBase
     }
 
     [HttpPost("GetPagedByFilter")]
-    public async Task<ActionResult<PagedResultDto<Structure>>> GetItems([FromBody] PagedStructureFilter query)
+    public async Task<ActionResult<PagedResultDto<StructureReturnDto>>> GetItems([FromBody] PagedStructureFilter query)
     {
-        var result = new PagedResultDto<Structure>();
+        var result = new PagedResultDto<StructureReturnDto>();
         // Calculate the skip count based on the page and pageSize
-        int skip = (query.Page - 1) * query.PageSize;
+        int skip = query.Page * query.PageSize;
 
         var retquery = _context.Structures.AsQueryable();
+        // Start with a true predicate
+        var predicate = PredicateBuilder.New<Structure>(true);
+        // Continue Building Predicates one by one 
         if (!String.IsNullOrEmpty(query.Display))
         {
-            retquery = retquery.Where(k => (k.DisplayFr).Contains(query.Display));
+            predicate = predicate.And(k => (k.DisplayFr.ToUpper()).Contains(query.Display.ToUpper()));
         }
+        // if (someCondition)
+        // {
+        //     predicate = predicate.And(x => x.SomeProperty == someValue);
+        // }
+
         // Retrieve the subset of data based on the skip count and pageSize
-        var subsetOfData = await retquery
-            .Skip(skip)
-            .Take(query.PageSize)
-            .ToListAsync();
-        result.TotalCount = await retquery.CountAsync();
-        result.Items = subsetOfData;
+        var subsetOfData = await retquery.Where(predicate).ToListAsync(); ;
+        result.Items = _mapper.Map<List<StructureReturnDto>>(subsetOfData.Skip(skip).Take(query.PageSize).ToList());
+        result.TotalCount = subsetOfData.Count();
         return Ok(result);
     }
 

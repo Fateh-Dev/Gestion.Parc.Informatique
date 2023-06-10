@@ -68,10 +68,21 @@ public class AuthManageController : ControllerBase
     }
 
 
+
     [HttpPost("addPermissionToRole")]
     public async Task<IActionResult> AddPermissionToRole(int idRole, List<PermissionCreateDto> model)
     {
         await _authManageService.AddPermissionsToRole(idRole, model);
+        return Ok(new { message = "Registration successful" });
+    }
+    [HttpPost("addPermissionToRoleList")]
+    public async Task<IActionResult> addPermissionToRoleList([FromBody] List<RoleWithListPermissions> items)
+    {
+        foreach (var item in items)
+        {
+            await _authManageService.AddPermissionsToRole(item.IdRole, item.Permissions);
+        }
+
         return Ok(new { message = "Registration successful" });
     }
 

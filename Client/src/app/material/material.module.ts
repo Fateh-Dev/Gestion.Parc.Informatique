@@ -38,9 +38,11 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 // Material Data tables
-import { MatPaginatorModule } from '@angular/material/paginator';
+// import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '../Shared/paginator';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [],
@@ -49,6 +51,7 @@ import { MatTableModule } from '@angular/material/table';
     MatAutocompleteModule,
     MatCheckboxModule,
     MatDatepickerModule,
+    DragDropModule,
     MatFormFieldModule,
     MatInputModule,
     MatRadioModule,

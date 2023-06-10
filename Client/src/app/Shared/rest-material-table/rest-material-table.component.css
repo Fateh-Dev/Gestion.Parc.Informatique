@@ -7,7 +7,42 @@
 .odd-row {
   background-color: white;
 }
+.odd-row:hover {
+  background-color: rgb(248, 249, 254) !important ;
+}
 
 .even-row {
   background-color: whitesmoke;
+}
+.even-row:hover {
+  background-color: rgb(251, 252, 255) !important;
+}
+
+.done {
+  color: #198600;
+}
+mat-form-field {
+  font-size: 12px;
+}
+.spacing {
+  margin: 4px;
+}
+.grid-container {
+  margin-bottom: 0px;
+  position: relative;
+}
+.toggle {
+  line-height: 34px !important;
+  max-height: 34px;
+  font-size: small;
+  align-items: center;
+}
+
+.mat-button-toggle-checked {
+  background-color: #0d47a1;
+  color: white !important;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
 }

@@ -99,32 +99,31 @@ public class AuthManageService : IAuthManageService
 
     public async Task AddPermissionsToRole(int roleId, List<PermissionCreateDto> permissionsList)
     {
+        var toRemove = _context._RolePermissions.Where(o => o.RoleId == roleId).ToList();
+        _context._RolePermissions.RemoveRange(toRemove);
+
         foreach (var item in permissionsList.ToList())
         {
 
-            // validate
-            if (_context._RolePermissions.Any(x => x.PermissionName == item.PermissionName && roleId == x.RoleId))
-                permissionsList.Remove(item);
-            else
-            {
-                var permission = await _context._Permissions.FirstOrDefaultAsync(x => x.PermissionName == item.PermissionName);
+            // fix if remove permissions
+            var permission = await _context._Permissions.FirstOrDefaultAsync(x => x.PermissionName == item.PermissionName);
 
-                if (permission == null)
-                { // create permission
-                    permission = CreatePermission(new PermissionCreateDto()
-                    {
-                        PermissionName = item.PermissionName
-                    });
-
-                }
-                var model = new RolePermission()
+            if (permission == null)
+            { // create permission
+                permission = CreatePermission(new PermissionCreateDto()
                 {
-                    RoleId = roleId,
-                    PermissionName = item.PermissionName,
-                    PermissionId = permission.Id
-                };
-                _context._RolePermissions.Add(model);
+                    PermissionName = item.PermissionName
+                });
+
             }
+            var model = new RolePermission()
+            {
+                RoleId = roleId,
+                PermissionName = item.PermissionName,
+                PermissionId = permission.Id
+            };
+            _context._RolePermissions.Add(model);
+
         }
 
         _context.SaveChanges();

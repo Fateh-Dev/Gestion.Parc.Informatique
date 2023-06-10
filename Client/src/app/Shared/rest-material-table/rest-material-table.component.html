@@ -1,4 +1,15 @@
 <div class="mat-elevation-z1">
+    <mat-toolbar fxLayout="row wrap" fxLayoutAlign="space-between center" fxLayoutGap="0px"
+        class="size-height-48 mat-elevation-z1">
+        <a fxFlex="10" class="spacing" mat-raised-button style="background-color: #0d47a1; color: white">
+            <mat-icon>search</mat-icon>Filtres
+        </a>
+
+        <span class="spacing"></span>
+        <span fxFlex="20" fxFlex style="text-align: center">Liste des Equipements
+        </span>
+    </mat-toolbar>
+
     <table mat-table [dataSource]="dataSource">
 
         <ng-container matColumnDef="position">
@@ -27,12 +38,11 @@
         </tr>
     </table>
 
-    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
+    <mat-paginator [pageSizeOptions]="[5, 10,15, 20]" [pageSize]="pageSize" [length]="_dataSource.totalCount"
+        showFirstLastButtons (page)="onPageChange($event)" aria-label="Select page of periodic elements">
     </mat-paginator>
+
 </div>
 
-<button (click)="previous()">Previous</button>
-<span *ngIf="!loading">{{_dataSource.totalCount}}</span>
-<button (click)="next()">Next</button>
 
-<pre *ngIf="!loading">{{_dataSource.items|json}}</pre>
+<!-- <pre *ngIf="!loading">{{_dataSource.items|json}}</pre> -->

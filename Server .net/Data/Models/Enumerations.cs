@@ -9,7 +9,7 @@ public enum TypesConsommation
 
 public enum Status
 {
-    undefined,
+    Undefined,
     Actif,
     EnMaintenance,
     HorsService,

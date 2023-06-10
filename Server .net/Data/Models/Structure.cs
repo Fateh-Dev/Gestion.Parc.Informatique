@@ -6,5 +6,7 @@ public class Structure : EntityBase
     public string? DisplayAr { get; set; }
     public string? Description { get; set; }
     public Guid? ParentStructureId { get; set; }
+
+    public virtual ICollection<Equipement> Equipements { get; set; }
 }
 

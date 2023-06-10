@@ -56,6 +56,7 @@ namespace Gestion.Parc.Informatique.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<Guid?>("CategoryId")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Color")
@@ -86,6 +87,7 @@ namespace Gestion.Parc.Informatique.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<Guid?>("MarqueId")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("MesurmentUnite")
@@ -95,6 +97,7 @@ namespace Gestion.Parc.Informatique.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<Guid?>("ModelId")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Observation")
@@ -125,6 +128,14 @@ namespace Gestion.Parc.Informatique.Migrations
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ActualPositionId");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("MarqueId");
+
+                    b.HasIndex("ModelId");
 
                     b.ToTable("Equipements");
                 });
@@ -211,9 +222,9 @@ namespace Gestion.Parc.Informatique.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("c21994aa-351a-4cae-b062-77236f29c0f4"),
+                            Id = new Guid("cebac24b-9d52-4db0-a2d0-6a74a1653e67"),
                             Age = 1,
-                            CreationTimeUtc = new DateTime(2023, 6, 4, 17, 55, 5, 308, DateTimeKind.Utc).AddTicks(7164),
+                            CreationTimeUtc = new DateTime(2023, 6, 10, 12, 24, 25, 138, DateTimeKind.Utc).AddTicks(7),
                             IsDeleted = false,
                             Nom = "Djehinet",
                             Order = 0,
@@ -221,9 +232,9 @@ namespace Gestion.Parc.Informatique.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c26a48c0-4888-4d15-aa16-70d3fb8a8280"),
+                            Id = new Guid("5faa204c-3aee-495a-9ad1-0be85582ea01"),
                             Age = 32,
-                            CreationTimeUtc = new DateTime(2023, 6, 4, 17, 55, 5, 308, DateTimeKind.Utc).AddTicks(7213),
+                            CreationTimeUtc = new DateTime(2023, 6, 10, 12, 24, 25, 138, DateTimeKind.Utc).AddTicks(57),
                             IsDeleted = false,
                             Nom = "Djehinet",
                             Order = 0,
@@ -231,9 +242,9 @@ namespace Gestion.Parc.Informatique.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c3dc8e1a-128c-4127-bb02-210b16c11c16"),
+                            Id = new Guid("aed82f2c-655d-4b8f-8860-10b1e7884c4b"),
                             Age = 30,
-                            CreationTimeUtc = new DateTime(2023, 6, 4, 17, 55, 5, 308, DateTimeKind.Utc).AddTicks(7217),
+                            CreationTimeUtc = new DateTime(2023, 6, 10, 12, 24, 25, 138, DateTimeKind.Utc).AddTicks(61),
                             IsDeleted = false,
                             Nom = "Djehinet",
                             Order = 0,
@@ -459,6 +470,39 @@ namespace Gestion.Parc.Informatique.Migrations
                     b.ToTable("_UserRoles");
                 });
 
+            modelBuilder.Entity("Gestion.Parc.Informatique.Data.Equipement", b =>
+                {
+                    b.HasOne("Gestion.Parc.Informatique.Data.Structure", "ActualStructureObject")
+                        .WithMany("Equipements")
+                        .HasForeignKey("ActualPositionId");
+
+                    b.HasOne("Gestion.Parc.Informatique.Data.Category", "CategoryObject")
+                        .WithMany("Equipements")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Gestion.Parc.Informatique.Data.Marque", "MarqueObject")
+                        .WithMany("Equipements")
+                        .HasForeignKey("MarqueId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Gestion.Parc.Informatique.Data.Model", "ModelObject")
+                        .WithMany("Equipements")
+                        .HasForeignKey("ModelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ActualStructureObject");
+
+                    b.Navigation("CategoryObject");
+
+                    b.Navigation("MarqueObject");
+
+                    b.Navigation("ModelObject");
+                });
+
             modelBuilder.Entity("Gestion.Parc.Informatique.Models.Auth.RolePermission", b =>
                 {
                     b.HasOne("Gestion.Parc.Informatique.Models.Auth.Permission", "Permission")
@@ -495,6 +539,26 @@ namespace Gestion.Parc.Informatique.Migrations
                     b.Navigation("Role");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Gestion.Parc.Informatique.Data.Category", b =>
+                {
+                    b.Navigation("Equipements");
+                });
+
+            modelBuilder.Entity("Gestion.Parc.Informatique.Data.Marque", b =>
+                {
+                    b.Navigation("Equipements");
+                });
+
+            modelBuilder.Entity("Gestion.Parc.Informatique.Data.Model", b =>
+                {
+                    b.Navigation("Equipements");
+                });
+
+            modelBuilder.Entity("Gestion.Parc.Informatique.Data.Structure", b =>
+                {
+                    b.Navigation("Equipements");
                 });
 
             modelBuilder.Entity("Gestion.Parc.Informatique.Models.Auth.Permission", b =>

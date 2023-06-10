@@ -32,6 +32,7 @@ builder.Services.AddAutoMapper(typeof(Program));
 // configure DI for application services
 builder.Services.AddScoped<IJwtUtils, JwtUtils>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IEquipementService, EquipementService>();
 builder.Services.AddScoped<IAuthManageService, AuthManageService>();
 
 builder.Services.AddSingleton<ISharedDataService, SharedDataService>(); // Store Global Sahred Data 

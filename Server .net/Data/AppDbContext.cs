@@ -62,6 +62,25 @@ public class AppDbContext : DbContext
         modelBuilder.ApplyConfiguration(new PersonneSeed());
         modelBuilder.ApplyConfiguration(new UserSeed());
 
+        modelBuilder.Entity<Equipement>(entity =>
+        {
+            entity.HasOne(d => d.MarqueObject)
+                .WithMany(p => p.Equipements)
+                .HasForeignKey(d => d.MarqueId);
+            entity.HasOne(d => d.ModelObject)
+                .WithMany(p => p.Equipements)
+                .HasForeignKey(d => d.ModelId);
+            entity.HasOne(d => d.CategoryObject)
+                .WithMany(p => p.Equipements)
+                .HasForeignKey(d => d.CategoryId);
+            entity.HasOne(d => d.ActualStructureObject)
+                .WithMany(p => p.Equipements)
+                .HasForeignKey(d => d.ActualPositionId);
+        });
+
+
+
+
         modelBuilder.Entity<UserRole>()
                    .HasKey(ur => new { ur.UserId, ur.RoleId });
 

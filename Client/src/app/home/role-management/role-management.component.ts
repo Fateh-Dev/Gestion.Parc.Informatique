@@ -12,6 +12,14 @@ export class Item {
     this.permissions = permissions;
   }
 }
+interface permissionDto {
+  permissionName: string;
+  description: string;
+}
+interface RoleDto {
+  idRole: number;
+  permissions: permissionDto[];
+}
 @Component({
   selector: 'app-role-management',
   templateUrl: './role-management.component.html',
@@ -33,15 +41,7 @@ export class RoleManagementComponent implements OnInit {
     if (checked) {
       this.payload.push(new Item(idRole, permissionName))
       // Send Logic
-      let a: rolePermission = {
-        roleId: idRole, permissionName: permissionName
-      }
-      this.appStoreService.addPermissionToRole(a).subscribe(e => {
-        this.toastr.success("done")
-      },
-        e => {
-          this.toastr.error("done")
-        })
+
     }
     else {
       // Remove Logic
@@ -51,6 +51,35 @@ export class RoleManagementComponent implements OnInit {
     }
     console.log(this.payload)
   }
+
+  submitChanges() {
+    const output: RoleDto[] = this.payload.reduce((result: RoleDto[], item) => {
+      const existingRole = result.find(role => role.idRole === item.idRole);
+      if (existingRole) {
+        existingRole.permissions.push({
+          permissionName: (item.permissions as string).toUpperCase(),
+          description: "-"
+        });
+      } else {
+        result.push({
+          idRole: item.idRole as number,
+          permissions: [{
+            permissionName: (item.permissions as string).toUpperCase(),
+            description: "-"
+          }]
+        });
+      }
+      return result;
+    }, []);
+
+    this.appStoreService.addPermissionToRole(output).subscribe(e => {
+      this.toastr.success("done")
+    },
+      e => {
+        this.toastr.error("done")
+      })
+  }
+
   requestApi() {
     this.loading = true;
     this.appStoreService.loadPermissions().subscribe(e => {

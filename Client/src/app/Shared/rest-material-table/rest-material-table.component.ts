@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
@@ -9,28 +9,24 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./rest-material-table.component.css']
 })
 export class RestMaterialTableComponent implements OnInit {
-  /**
-   *
-   */
+
   loading = false;
+
   @Input()
+  url: string = "";
   _dataSource = {
     totalCount: 0,
     items: []
   };
+  @Input()
+  page = 0;
+  @Input()
+  pageSize = 10;
+
+  constructor(public http: HttpClient) { }
 
   @Input()
-  page = 1;
-
-  @Input()
-  pageSize = 20;
-
-  constructor(public http: HttpClient) {
-    this.requestApi();
-  }
-
-  title = 'Client';
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  displayedColumns: string[] = [];
   dataSource = new MatTableDataSource<any>(this._dataSource.items);
 
   @ViewChild(MatPaginator)
@@ -42,32 +38,24 @@ export class RestMaterialTableComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
     this.requestApi();
   }
-  requestApi() {
+  requestApi(event?: PageEvent) {
     this.loading = true;
-    this.http.post<any>("https://localhost:8000/Structures/GetPagedByFilter",
-      { page: this.page, pageSize: this.pageSize }).subscribe(e => {
-        // console.log(e)
+    this.http.post<any>(this.url,
+      { page: event?.pageIndex || this.page, pageSize: event?.pageSize || this.pageSize }).subscribe(e => {
         this.dataSource = new MatTableDataSource<any>(e.items);
         this._dataSource = e;
         this.loading = false;
       })
   }
-  next() {
-    this.page = this.page + 1;
-    if (this.page * this.pageSize <= this._dataSource.totalCount) {
-      this.requestApi();
-
-    } else {
-      this.page = this.page - 1;
-    }
+  onPageChange(event: PageEvent) {
+    this.requestApi(event)
   }
-  previous() {
 
-    this.page = this.page - 1;
-    if (this.page >= 1)
-      this.requestApi();
-    else this.page = 0;
-  }
+  // length:24 
+  // pageIndex:1 
+  // pageSize:10 
+  // previousPageIndex:0
+
   ngOnInit(): void {
   }
 }

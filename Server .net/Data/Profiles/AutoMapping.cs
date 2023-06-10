@@ -13,6 +13,7 @@ public class AutoMapping : Profile
         CreateMap<Settings, SettingsReturnDto>();
         CreateMap<SettingsCreateDto, Settings>();
 
+        CreateMap<Structure, StructureReturnDto>();
         CreateMap<StrcutureCreateDto, Structure>();
         CreateMap<Structure, StructureWithChildrenDto>();
 

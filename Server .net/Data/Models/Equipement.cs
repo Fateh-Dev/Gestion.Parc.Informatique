@@ -14,7 +14,7 @@ public class Equipement : EntityBase
     public string? CategoryDisplay { get; set; }  //  Ordinateur | Imprimante | Unite Centrale ...etc
     public TypesConsommation TypeConsommation { get; set; }  //  Consommable | Non Consommable
     public Etats Etat { get; set; } = Etats.Undefined;
-    public Status Status { get; set; } = Status.undefined;
+    public Status Status { get; set; } = Status.Undefined;
     public string? Description { get; set; }
     public DateTime? ReformeDate { get; set; } // Updated When Mise En Reforme
     public Guid? ActualPositionId { get; set; }   // TO DO LATER
@@ -24,5 +24,10 @@ public class Equipement : EntityBase
     public string? Observation { get; set; }
     public string? Color { get; set; }
     public string? MesurmentUnite { get; set; }  // From DataBase
+
+    public virtual Marque MarqueObject { get; set; }
+    public virtual Model ModelObject { get; set; }
+    public virtual Category CategoryObject { get; set; }
+    public virtual Structure ActualStructureObject { get; set; }
 
 }
