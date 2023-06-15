@@ -8,7 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
   templateUrl: './rest-material-table.component.html',
   styleUrls: ['./rest-material-table.component.css']
 })
-export class RestMaterialTableComponent implements OnInit {
+export class RestMaterialTableComponent {
 
   loading = false;
 
@@ -56,6 +56,4 @@ export class RestMaterialTableComponent implements OnInit {
   // pageSize:10 
   // previousPageIndex:0
 
-  ngOnInit(): void {
-  }
 }

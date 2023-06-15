@@ -61,6 +61,9 @@ public class AppDbContext : DbContext
     {
         modelBuilder.ApplyConfiguration(new PersonneSeed());
         modelBuilder.ApplyConfiguration(new UserSeed());
+        modelBuilder.ApplyConfiguration(new MarqueSeed());
+        modelBuilder.ApplyConfiguration(new CategorySeed());
+        modelBuilder.ApplyConfiguration(new ModelSeed());
 
         modelBuilder.Entity<Equipement>(entity =>
         {

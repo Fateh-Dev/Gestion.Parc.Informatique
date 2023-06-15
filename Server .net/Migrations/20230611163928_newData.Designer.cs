@@ -3,6 +3,7 @@ using System;
 using Gestion.Parc.Informatique.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Gestion.Parc.Informatique.Migrations
 {
     [DbContext(typeof(SqliteDbContext))]
-    partial class SqliteDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230611163928_newData")]
+    partial class newData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.1");
@@ -38,43 +40,6 @@ namespace Gestion.Parc.Informatique.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("a9264c8e-d4c4-4a32-be52-dbb5393a7a31"),
-                            Description = "Category 1",
-                            DisplayFr = "Category 1",
-                            Order = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("eaeb0684-b0da-428c-8ec5-e42eb028066d"),
-                            Description = "Category 2",
-                            DisplayFr = "Category 2",
-                            Order = 2
-                        },
-                        new
-                        {
-                            Id = new Guid("25d247d5-e703-4a50-b745-d9cf8203caae"),
-                            Description = "Category 3",
-                            DisplayFr = "Category 3",
-                            Order = 3
-                        },
-                        new
-                        {
-                            Id = new Guid("e47df604-154c-4e58-a50a-de0eca2b3e7b"),
-                            Description = "Category 4",
-                            DisplayFr = "Category 4",
-                            Order = 4
-                        },
-                        new
-                        {
-                            Id = new Guid("013f566e-8d30-4d95-8b33-42e4a0b338ae"),
-                            Description = "Category 5",
-                            DisplayFr = "Category 5",
-                            Order = 5
-                        });
                 });
 
             modelBuilder.Entity("Gestion.Parc.Informatique.Data.Equipement", b =>
@@ -202,38 +167,38 @@ namespace Gestion.Parc.Informatique.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("b8f149c8-3b26-46ec-bd2d-abbe1424848d"),
+                            Id = new Guid("b92ccfcc-42d4-4fd4-b059-ae6afd3662e8"),
                             Description = "HP",
                             DisplayFr = "HP",
                             Order = 1
                         },
                         new
                         {
-                            Id = new Guid("d14f4b20-7c4a-4da1-8182-317f922849ab"),
+                            Id = new Guid("7908b1c2-9985-48ac-b12e-2703b7401c3b"),
                             Description = "ACER",
                             DisplayFr = "ACER",
-                            Order = 2
+                            Order = 1
                         },
                         new
                         {
-                            Id = new Guid("72b670f4-e936-4215-8be1-678d5b24ac96"),
+                            Id = new Guid("9d9143c2-c28e-4a27-8eca-7d87247dbaeb"),
                             Description = "FUJITSU",
                             DisplayFr = "FUJITSU",
-                            Order = 3
+                            Order = 1
                         },
                         new
                         {
-                            Id = new Guid("b5bd3515-f734-47d5-9b2c-1c28384adb99"),
+                            Id = new Guid("d29e5726-3f2d-4c19-8b71-22118b0a691c"),
                             Description = "DELL",
                             DisplayFr = "DELL",
-                            Order = 4
+                            Order = 1
                         },
                         new
                         {
-                            Id = new Guid("a82bb24b-9215-42f3-88d4-7a1948cff06f"),
+                            Id = new Guid("9b1e9d33-a6ec-43dd-b512-04072592eaae"),
                             Description = "TOSHIBA",
                             DisplayFr = "TOSHIBA",
-                            Order = 5
+                            Order = 1
                         });
                 });
 
@@ -258,43 +223,6 @@ namespace Gestion.Parc.Informatique.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Models");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("0ebdc9de-9cbe-45eb-a414-ec391605b5ca"),
-                            Description = "Model 1",
-                            DisplayFr = "Model 1",
-                            Order = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("7b655c44-0d3c-46d9-a5a5-37d6f88501b9"),
-                            Description = "Model 2",
-                            DisplayFr = "Model 2",
-                            Order = 2
-                        },
-                        new
-                        {
-                            Id = new Guid("3dc56ce3-9afb-48f7-86a5-8cb1e52887a3"),
-                            Description = "Model 3",
-                            DisplayFr = "Model 3",
-                            Order = 3
-                        },
-                        new
-                        {
-                            Id = new Guid("d7715320-cd75-4c48-bc0b-31f5bad93cf9"),
-                            Description = "Model 4",
-                            DisplayFr = "Model 4",
-                            Order = 4
-                        },
-                        new
-                        {
-                            Id = new Guid("c557e6cb-ae17-4e20-9044-2798b4c1b8e1"),
-                            Description = "Model 5",
-                            DisplayFr = "Model 5",
-                            Order = 5
-                        });
                 });
 
             modelBuilder.Entity("Gestion.Parc.Informatique.Data.Personne", b =>
@@ -333,9 +261,9 @@ namespace Gestion.Parc.Informatique.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("21b7ea8b-4e14-447f-8336-f8b70fcf0ea6"),
+                            Id = new Guid("30cfeafc-36f0-423c-80fa-dc56cbab84a8"),
                             Age = 1,
-                            CreationTimeUtc = new DateTime(2023, 6, 11, 16, 48, 23, 204, DateTimeKind.Utc).AddTicks(6802),
+                            CreationTimeUtc = new DateTime(2023, 6, 11, 16, 39, 24, 891, DateTimeKind.Utc).AddTicks(7904),
                             IsDeleted = false,
                             Nom = "Djehinet",
                             Order = 0,
@@ -343,9 +271,9 @@ namespace Gestion.Parc.Informatique.Migrations
                         },
                         new
                         {
-                            Id = new Guid("7907c627-624b-490b-9870-5dcea12a61e5"),
+                            Id = new Guid("403c90fc-397b-4e07-b44a-fbea4e1c84b1"),
                             Age = 32,
-                            CreationTimeUtc = new DateTime(2023, 6, 11, 16, 48, 23, 204, DateTimeKind.Utc).AddTicks(6860),
+                            CreationTimeUtc = new DateTime(2023, 6, 11, 16, 39, 24, 891, DateTimeKind.Utc).AddTicks(7962),
                             IsDeleted = false,
                             Nom = "Djehinet",
                             Order = 0,
@@ -353,9 +281,9 @@ namespace Gestion.Parc.Informatique.Migrations
                         },
                         new
                         {
-                            Id = new Guid("5e06237f-aa27-4ef7-8372-a984353aa614"),
+                            Id = new Guid("ccb6b9ee-1ddb-4ffc-baff-3645a4e35c42"),
                             Age = 30,
-                            CreationTimeUtc = new DateTime(2023, 6, 11, 16, 48, 23, 204, DateTimeKind.Utc).AddTicks(6865),
+                            CreationTimeUtc = new DateTime(2023, 6, 11, 16, 39, 24, 891, DateTimeKind.Utc).AddTicks(7971),
                             IsDeleted = false,
                             Nom = "Djehinet",
                             Order = 0,
