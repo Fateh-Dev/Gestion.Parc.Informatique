@@ -1,0 +1,50 @@
+.profile-card {
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.profile-wrap {
+    padding:30px 100px ;
+    background-color: whitesmoke;
+}
+
+.profile-card-up { 
+    background: linear-gradient(to left, bisque, #3f51b5); /* Replace these colors with your desired gradient */
+   
+    min-height:130px  !important;
+}
+
+.profile-card-down {
+    background-color: white;
+
+}
+
+.avatar {
+    /* height: 160px; */
+    margin: 20px;
+    position: relative;
+    bottom: -80px;
+    padding: 20px;
+    width: 150px;
+    height:0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Add any other desired styles */
+  }
+  
+  .avatar-image {
+    cursor: pointer;
+    width: 150px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: whitesmoke;
+    border-radius: 50%;
+  }
+  
+  .avatar-image img {
+    border-radius: 50%;
+    border: 6px solid white; 
+  }

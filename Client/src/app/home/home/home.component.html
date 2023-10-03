@@ -3,46 +3,53 @@
         <div fxLayout="column" class="appDrawer">
             <div class="avatar">
                 <div class="avatar-image" [routerLink]="'./profile'">
-                    <img src="assets/images/avatar.png" width="120" height="120" />
+                    <img src="assets/images/avatar.png" width="80" height="80" />
                 </div>
             </div>
             <div class="profileName" [routerLink]="'./profile'">{{authService.getCurrentUser().username}}</div>
         </div>
         <mat-list role="list">
-            <mat-list-item role="listitem" [routerLink]="'./'">Dashboard</mat-list-item>
-            <mat-list-item role="listitem" [routerLink]="'./settings'">Settings</mat-list-item>
-            <mat-list-item role="listitem" [routerLink]="'./users'"
+            <mat-list-item role="listitem" [routerLink]="'./dashboard'"
+                routerLinkActive="active-route">Dashboard</mat-list-item>
+            <mat-list-item role="listitem" [routerLink]="'./settings'"
+                routerLinkActive="active-route">Settings</mat-list-item>
+            <mat-list-item role="listitem" [routerLink]="'./users'" routerLinkActive="active-route"
                 *ngIf="'VIEW'|hasPermission|async">Utilisateurs</mat-list-item>
-            <mat-list-item role="listitem" [routerLink]="'./roles'">Roles</mat-list-item>
-            <mat-list-item role="listitem" [routerLink]="'./equipements'">Equipements</mat-list-item>
+            <mat-list-item role="listitem" [routerLink]="'./roles'"
+                routerLinkActive="active-route">Roles</mat-list-item>
+            <mat-list-item role="listitem" [routerLink]="'./equipements'"
+                routerLinkActive="active-route">Equipements</mat-list-item>
         </mat-list>
     </mat-drawer>
     <mat-drawer-content>
-        <mat-toolbar color="primary" class="mat-elevation-z4">
+        <mat-toolbar color="primary" class="mat-elevation-z4 custom-toolbar">
             <mat-toolbar-row>
                 <button mat-icon-button (click)="drawer.toggle()">
                     <mat-icon aria-hidden="false" aria-label="Example heart icon">menu</mat-icon>
                 </button>
-                <span style="padding: 0px 20px;">Système de gestion du parc informatique</span>
+                <span style="padding: 0px 20px;" fxHide.lt-md>Système de gestion du parc informatique</span>
+                <span style="padding: 0px 20px;" fxHide fxShow.lt-md>SGPI</span>
                 <span class="example-spacer"></span>
-                <button mat-icon-button [routerLink]="'./users'" *ngIf="'VIEW'|hasPermission|async"><mat-icon
+                <!-- <button mat-icon-button [routerLink]="'./profile'" *ngIf="'VIEW'|hasPermission|async"><mat-icon
                         aria-hidden="false" aria-label="Example heart icon">manage_accounts</mat-icon>
                 </button>
                 <button mat-icon-button [routerLink]="'./roles'"><mat-icon aria-hidden="false"
                         aria-label="Example heart icon">group</mat-icon>
-                </button>
+                </button> -->
                 <button mat-icon-button [routerLink]="'./profile'"><mat-icon aria-hidden="false"
                         aria-label="Example heart icon">account_circle</mat-icon>
                 </button>
                 <button mat-icon-button [routerLink]="'./settings'"><mat-icon aria-hidden="false"
                         aria-label="Example heart icon">settings</mat-icon>
                 </button>
-                <button mat-icon-button (click)="logout()">
+                <button mat-icon-button (click)="logout()" cdkDrag>
                     <mat-icon aria-hidden="false" aria-label="Example heart icon">logout</mat-icon>
                 </button>
             </mat-toolbar-row>
         </mat-toolbar>
-        <div style="width: 100%;padding:20px 0px;" id="mainContent"><router-outlet></router-outlet></div>
+        <div style="width: 100%;background-color:whitesmoke" id="mainContent">
+            <router-outlet></router-outlet>
+        </div>
 
     </mat-drawer-content>
 </mat-drawer-container>

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -10,12 +10,22 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  getCurrentUser(id: number): Observable<User> {
+  // Function to get the current user's information with an authenticated token
+  getCurrentUser(id: number, token: string): Observable<User> {
+    // Construct the URL for the API endpoint
     const url = `${this.apiUrl}/AuthManage/getUserWithPermissions?id=` + id;
-    return this.http.get<User>(url);
+
+    // Create HTTP headers with the 'Authorization' header containing the token
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    // Make an HTTP GET request to fetch the user's data with the provided headers
+    return this.http.get<User>(url, { headers: headers });
   }
 }
 
+// Define the structure of the User object
 interface User {
   id: number;
   username: string;

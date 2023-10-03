@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { AppStoreService } from 'src/app/Shared/Services/app-store.service';
+import { AuthService } from 'src/app/Shared/Services/auth.service';
 
 @Component({
   selector: 'app-user-management',
@@ -11,7 +12,7 @@ export class UserManagementComponent implements OnInit {
   users = {};
   loading = false;
   constructor(public toastr: ToastrService,
-    public appStoreService: AppStoreService) {
+    public appStoreService: AppStoreService, public authService: AuthService) {
     this.requestApi();
   }
   ngOnInit(): void {

@@ -14,11 +14,10 @@ import { SettingService } from 'src/app/Shared/Services/setting.service';
 export class HomeComponent implements OnInit {
 
   constructor(public toastr: ToastrService,
-    private router: Router, public authService: AuthService) {
+    private router: Router, public authService: AuthService, public appStoreService: AppStoreService) {
   }
   ngOnInit(): void {
   }
-
   logout() {
     // Remove token and userId From localStorage
     this.router.navigate(['/authentication']);

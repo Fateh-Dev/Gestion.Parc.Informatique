@@ -1,1 +1,32 @@
-<pre>{{users|json}}</pre>
+<div fxLayout="column" class="profile-wrap">
+    <div class="profile-card" fxLayout="column">
+        <div fxflex fxFlexFill class="profile-card-up">
+
+            <div class="avatar">
+                <div class="avatar-image">
+                    <img src="assets/images/avatar.png" width="150" height="150" />
+                </div>
+            </div>
+        </div>
+        <div fxflex fxFlexFill class="profile-card-down">
+            <div fxLayout="row" fxLayoutAlign="end end">
+                <button mat-icon-button [matMenuTriggerFor]="menu"><mat-icon>more_vert</mat-icon></button>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item>
+                        <mat-icon>dialpad</mat-icon>
+                        <span>Redial</span>
+                    </button>
+                    <button mat-menu-item disabled>
+                        <mat-icon>voicemail</mat-icon>
+                        <span>Check voice mail</span>
+                    </button>
+                    <button mat-menu-item>
+                        <mat-icon>notifications_off</mat-icon>
+                        <span>Disable alerts</span>
+                    </button>
+                </mat-menu>
+            </div>
+            <pre>{{authService.getCurrentUser()|json}}</pre>
+        </div>
+    </div>
+</div>

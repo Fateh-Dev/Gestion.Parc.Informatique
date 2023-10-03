@@ -12,8 +12,8 @@ const routes: Routes = [
   {
     path: '', component: HomeComponent,
     children: [
-      { path: '', component: DashboardComponent },
-      { path: 'users', component: UserManagementComponent },
+      { path: 'dashboard', component: DashboardComponent },
+      { path: 'profile', component: UserManagementComponent },
       { path: 'roles', component: RoleManagementComponent },
       { path: 'settings', component: SettingsComponent },
       { path: 'equipements', loadChildren: () => import('../equipement/equipement.module').then(m => m.EquipementModule) },

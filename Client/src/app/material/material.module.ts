@@ -44,11 +44,13 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '../Shared/paginator';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
+import { CdkAccordionModule } from '@angular/cdk/accordion';
+
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    MatAutocompleteModule,
+    MatAutocompleteModule, CdkAccordionModule,
     MatCheckboxModule,
     MatDatepickerModule,
     DragDropModule,
@@ -103,6 +105,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     MatExpansionModule,
     MatGridListModule,
     MatListModule,
+    CdkAccordionModule,
     MatStepperModule,
     MatTabsModule,
     MatTreeModule,

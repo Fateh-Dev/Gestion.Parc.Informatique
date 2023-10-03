@@ -1,3 +1,5 @@
+import { CdkDrag, CdkDragDrop, CdkDragPlaceholder, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
+import { NgFor } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
@@ -96,4 +98,5 @@ export class RoleManagementComponent implements OnInit {
         this.toastr.error("You don't Have Permission to load permissions")
       })
   }
+
 }

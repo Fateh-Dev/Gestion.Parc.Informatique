@@ -1,0 +1,13 @@
+[
+  {
+    "Id": "4C21FF57-EC4E-41A7-8AF8-CC8612DD6EF5",
+    "AppName": "Gestion.Parc.Informatique",
+    "StructureId": "50000001-0000-0000-0000-000000000000",
+    "Description": "Gestion.Parc.Informatique",
+    "UserId": 0,
+    "IsDeleted": 0,
+    "CreationTimeUtc": "2023-06-17 17:13:51.2359604",
+    "ExtraProperties": null,
+    "Order": 0
+  }
+]

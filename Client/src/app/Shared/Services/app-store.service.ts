@@ -17,6 +17,12 @@ export class AppStoreService {
   loadUsers() {
     return this.http.get<any>("https://localhost:8000/Users");
   }
+  loadCurrentUser() {
+    return this.http.get<any>("https://localhost:8000/Users/current");
+  }
+  loadUsersWthRoles() {
+    return this.http.get<any>("https://localhost:8000/AuthManage/getUserWithRoles/1");
+  }
   loadRoles() {
     return this.http.get<any>("https://localhost:8000/AuthManage/getAllRoles");
   }
@@ -25,6 +31,11 @@ export class AppStoreService {
   }
   addPermissionToRole(data: any) {
     return this.http.post<any>("https://localhost:8000/AuthManage/addPermissionToRoleList", data);
+  }
+
+  
+  callScraber() {
+    return this.http.get<any>("https://localhost:8000/WebScraber/webSccrab");
   }
 
 }
