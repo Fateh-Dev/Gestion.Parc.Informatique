@@ -1,6 +1,4 @@
-namespace Gestion.Parc.Informatique.Authorization;
-
-using Gestion.Parc.Informatique.Data;
+using Gestion.Parc.Informatique.Data; // Import necessary namespaces
 using Gestion.Parc.Informatique.Models.Auth;
 using Gestion.Parc.Informatique.Service;
 using Microsoft.Extensions.Options;
@@ -9,17 +7,21 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
+// Define an interface for JWT utility operations
 public interface IJwtUtils
 {
+    // Method to generate a JWT token from a user object
     public string GenerateToken(User user);
+
+    // Method to validate a JWT token and retrieve the user's ID
     public int? ValidateToken(string token);
 }
 
+// Implementation of the IJwtUtils interface for JWT token operations
 public class JwtUtils : IJwtUtils
 {
-    // private readonly AppSettings _appSettings;
-    private readonly IConfiguration _config;
-    private readonly IServiceScopeFactory _scopeFactory;
+    private readonly IConfiguration _config; // Configuration for JWT settings
+    private readonly IServiceScopeFactory _scopeFactory; // Dependency for service scope
 
     public JwtUtils(IConfiguration config, IServiceScopeFactory scopeFactory)
     {
@@ -27,68 +29,77 @@ public class JwtUtils : IJwtUtils
         _scopeFactory = scopeFactory;
     }
 
+    // Method to generate a JWT token from a user object
     public string GenerateToken(User user)
     {
-        // generate token that is valid for 7 days
+        // Initialize token generation components
         var tokenHandler = new JwtSecurityTokenHandler();
-        var key = System.Text.Encoding.UTF8.GetBytes(_config.GetSection("Appsettings:Secret").Value);
-        // var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+        var key = Encoding.UTF8.GetBytes(_config.GetSection("Appsettings:Secret").Value);
         var userWithPer = new UserWithPermissionDto();
+
+        // Create a scoped context for accessing services
         using (var scope = _scopeFactory.CreateScope())
         {
-            // Using Context inside IHosted Service
+            // Resolve the PermissionRepository service
             var _authService = scope.ServiceProvider.GetRequiredService<PermissionRepository>();
 
+            // Retrieve user permissions
             userWithPer = _authService.GetUserWithPermissions(user.Id);
         }
 
+        // Define claims for the JWT token
         var claims = new List<Claim>();
         claims.Add(new Claim("id", user.Id.ToString()));
         foreach (var item in userWithPer.PermissionNames)
         {
             claims.Add(new Claim("Permission", item));
         }
+
+        // Define token descriptor with expiration and signing credentials
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(claims.ToArray()),
             Expires = DateTime.UtcNow.AddDays(365),
             SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
         };
+
+        // Create and write the JWT token
         var token = tokenHandler.CreateToken(tokenDescriptor);
         return tokenHandler.WriteToken(token);
     }
 
+    // Method to validate a JWT token and retrieve the user's ID
     public int? ValidateToken(string token)
     {
         if (token == null)
             return null;
 
+        // Initialize token validation components
         var tokenHandler = new JwtSecurityTokenHandler();
-        var key = System.Text.Encoding.UTF8.GetBytes(_config.GetSection("Appsettings:Secret").Value);
-        // var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+        var key = Encoding.UTF8.GetBytes(_config.GetSection("Appsettings:Secret").Value);
+
         try
         {
+            // Validate the token and retrieve its claims
             tokenHandler.ValidateToken(token, new TokenValidationParameters
             {
                 ValidateIssuerSigningKey = true,
                 IssuerSigningKey = new SymmetricSecurityKey(key),
                 ValidateIssuer = false,
                 ValidateAudience = false,
-                // set clockskew to zero so tokens expire exactly at token expiration time (instead of 5 minutes later)
-                ClockSkew = TimeSpan.Zero
+                ClockSkew = TimeSpan.Zero // Set clockskew to zero for precise expiration checking
             }, out SecurityToken validatedToken);
 
+            // Extract the user ID from the validated token's claims
             var jwtToken = (JwtSecurityToken)validatedToken;
             var userId = int.Parse(jwtToken.Claims.First(x => x.Type == "id").Value);
 
-            // If not Validated Return Null
-
-            // return user id from JWT token if validation successful
+            // Return the user ID if validation is successful
             return userId;
         }
         catch
         {
-            // return null if validation fails
+            // Return null if token validation fails
             return null;
         }
     }
